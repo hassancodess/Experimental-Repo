@@ -23,5 +23,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     letterSpacing: 0.5,
+    // color: COLORS.gray,
   },
 });

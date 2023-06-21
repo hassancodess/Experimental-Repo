@@ -23,6 +23,9 @@ const Login = ({navigation}) => {
   const navigateToRegisterScreen = () => {
     navigation.navigate('Register');
   };
+  const navigateToForgotPasswordScreen = () => {
+    navigation.navigate('ForgotPassword');
+  };
   return (
     <KeyboardAvoidingView style={{flex: 1}}>
       <ScrollView>
@@ -42,7 +45,9 @@ const Login = ({navigation}) => {
               <_TextInput placeholder="Enter your email addresss" password />
             </View>
           </View>
-          <Pressable style={styles.forgotPasswordContainer}>
+          <Pressable
+            style={styles.forgotPasswordContainer}
+            onPress={navigateToForgotPasswordScreen}>
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
           </Pressable>
           <_Button>Login</_Button>
@@ -64,7 +69,7 @@ export default Login;
 
 const styles = StyleSheet.create({
   textInputContainer: {
-    gap: SIZES.xs,
+    gap: SIZES.sm,
   },
   inputsContainer: {
     gap: 20,

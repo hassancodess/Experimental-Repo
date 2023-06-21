@@ -53,7 +53,7 @@ export default Register;
 
 const styles = StyleSheet.create({
   textInputContainer: {
-    gap: SIZES.xs,
+    gap: SIZES.sm,
   },
   inputsContainer: {
     gap: 20,

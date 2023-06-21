@@ -2,10 +2,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {COLORS, SIZES} from '../../constants';
 
-const SubHeadingText = ({children}) => {
+const SubHeadingText = ({children, color}) => {
   return (
-    <View style={styles.rowContainer}>
-      <Text style={styles.screenText}>{children}</Text>
+    <View style={styles.container}>
+      <Text style={[styles.text, color && textColor(color)]}>{children}</Text>
     </View>
   );
 };
@@ -13,12 +13,19 @@ const SubHeadingText = ({children}) => {
 export default SubHeadingText;
 
 const styles = StyleSheet.create({
-  rowContainer: {
+  container: {
     marginBottom: SIZES.xxl,
   },
-  screenText: {
-    fontSize: SIZES.lg,
+  text: {
+    fontSize: SIZES.xl,
     fontWeight: 'bold',
     color: COLORS.primary,
+    lineHeight: 40,
   },
 });
+
+const textColor = color => {
+  return {
+    color: color,
+  };
+};

@@ -15,7 +15,6 @@ export default _Button;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: 'red',
     padding: 20,
     borderRadius: 10,
     backgroundColor: COLORS.primary,
@@ -26,5 +25,6 @@ const styles = StyleSheet.create({
     fontSize: SIZES.lg,
     textAlign: 'center',
     color: COLORS.white,
+    fontWeight: 'bold',
   },
 });
