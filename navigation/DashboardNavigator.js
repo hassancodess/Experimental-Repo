@@ -15,9 +15,10 @@ const icons = {
 const DashboardNavigator = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       screenOptions={({route}) => ({
         tabBarIcon: ({color, size}) => {
-          return <Icon name={icons[route.name]} size={24} color={color} />;
+          return <Ionicons name={icons[route.name]} size={24} color={color} />;
         },
       })}>
       <Tab.Screen name="Home" component={Home} />

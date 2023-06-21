@@ -1,12 +1,6 @@
 import {createThumbnail} from 'react-native-create-thumbnail';
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Pressable,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, View, FlatList, Pressable, ScrollView} from 'react-native';
+import {Text} from 'react-native-paper';
 import React, {useEffect, useState} from 'react';
 import {getAllVideos} from '../utils/fileSystem';
 import FastImage from 'react-native-fast-image';
@@ -27,16 +21,15 @@ const VideosList = () => {
     }
   }, [isFocused]);
 
-  //   useEffect(() => {
-  //     console.log('vieds', videos);
-  //     // handleVideos();
-  //   }, [videos]);
-
   const handleVideos = async () => {
     try {
       setThumbnails([]);
       setVideos([]);
+      let start = performance.now();
       const videos = await getAllVideos();
+      let timeTaken = performance.now() - start;
+      console.log('performance', timeTaken);
+
       // console.log('videsssss', videos);
       for (const video of videos) {
         //generate Thumbnail
@@ -56,9 +49,9 @@ const VideosList = () => {
   const renderItem = ({item}) => {
     // console.log('item', item);
     const playVideo = item => {
-      console.log('playVideo', item);
+      // console.log('playVideo', item);
       const videoUrl = `file://${item.path}`;
-      console.log('videoURL', videoUrl);
+      // console.log('videoURL', videoUrl);
       setVideo(videoUrl);
     };
     return (

@@ -11,7 +11,7 @@ const MainNavigator = () => {
   return (
     <NavigationContainer>
       <Navigator
-        initialRouteName="Authentication"
+        initialRouteName="Dashboard"
         screenOptions={{
           headerShown: false,
         }}>

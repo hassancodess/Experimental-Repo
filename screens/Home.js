@@ -2,13 +2,12 @@ import React, {useState, useEffect, useRef} from 'react';
 import {
   StyleSheet,
   View,
-  Text,
   Platform,
   StatusBar,
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {Button} from 'react-native-paper';
+import {Button, Text} from 'react-native-paper';
 import {
   askForAudioPermission,
   askForCameraPermission,
