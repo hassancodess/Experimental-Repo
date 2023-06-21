@@ -12,3 +12,7 @@ export const askForAudioPermission = async () => {
   const result = await request(PERMISSIONS.ANDROID.RECORD_AUDIO);
   console.log('camera', result);
 };
+// export const askForForegroundPermission = async () => {
+//   const result = await request(PERMISSIONS.ANDROID.);
+//   console.log('camera', result);
+// };

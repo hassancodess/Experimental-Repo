@@ -1,11 +1,12 @@
 import {createThumbnail} from 'react-native-create-thumbnail';
 import {StyleSheet, View, FlatList, Pressable, ScrollView} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Text, Button} from 'react-native-paper';
 import React, {useEffect, useState} from 'react';
 import {getAllVideos} from '../utils/fileSystem';
 import FastImage from 'react-native-fast-image';
 import Video from 'react-native-video';
 import {useIsFocused} from '@react-navigation/native';
+import BackgroundService from 'react-native-background-actions';
 
 const VideosList = () => {
   const [thumbnails, setThumbnails] = useState([]);
@@ -17,20 +18,15 @@ const VideosList = () => {
 
   useEffect(() => {
     if (isFocused) {
-      handleVideos();
+      // handleVideos();
+      handleStartBackgroundTask();
     }
   }, [isFocused]);
 
-  const handleVideos = async () => {
+  const backgroundTask = async taskDataArguments => {
     try {
-      setThumbnails([]);
-      setVideos([]);
       let start = performance.now();
       const videos = await getAllVideos();
-      let timeTaken = performance.now() - start;
-      console.log('performance', timeTaken);
-
-      // console.log('videsssss', videos);
       for (const video of videos) {
         //generate Thumbnail
         const thumbnail = await createThumbnail({
@@ -42,10 +38,45 @@ const VideosList = () => {
         };
         setVideos(prev => [...prev, obj]);
       }
+      let timeTaken = performance.now() - start;
+      console.log('performance', timeTaken);
+      await Promise.resolve();
     } catch (error) {
-      console.log('error', error);
+      console.log('error', error.message);
     }
   };
+  const handleStartBackgroundTask = async () => {
+    const options = {
+      taskName: 'Example',
+      taskTitle: 'ExampleTask title',
+      taskDesc: 'ExampleTask description',
+      taskIcon: {
+        name: 'ic_launcher',
+        type: 'mipmap',
+      },
+      color: '#ff00ff',
+      linkingURI: 'yourSchemeHere://chat/jane', // See Deep Linking for more info
+      parameters: {
+        delay: 1000,
+      },
+    };
+
+    await BackgroundService.start(backgroundTask, options);
+    await BackgroundService.updateNotification({
+      taskDesc: 'New ExampleTask description',
+    }); // Only Android, iOS will ignore this call
+    // iOS will also run everything here in the background until .stop() is called
+  };
+
+  const handleStopBackgroundTask = async () => {
+    await BackgroundService.stop();
+  };
+
+  const clearStates = () => {
+    setThumbnails([]);
+    setVideos([]);
+  };
+
   const renderItem = ({item}) => {
     // console.log('item', item);
     const playVideo = item => {
