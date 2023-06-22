@@ -19,7 +19,7 @@ const VideosList = () => {
   useEffect(() => {
     if (isFocused) {
       // handleVideos();
-      handleStartBackgroundTask();
+      // handleStartBackgroundTask();
     }
   }, [isFocused]);
 
@@ -64,7 +64,8 @@ const VideosList = () => {
     await BackgroundService.start(backgroundTask, options);
     await BackgroundService.updateNotification({
       taskDesc: 'New ExampleTask description',
-    }); // Only Android, iOS will ignore this call
+    });
+    // Only Android, iOS will ignore this call
     // iOS will also run everything here in the background until .stop() is called
   };
 

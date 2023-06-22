@@ -17,7 +17,7 @@ import {
   Camera as CameraVision,
   useCameraDevices,
 } from 'react-native-vision-camera';
-import {storeFile} from '../utils/fileSystem';
+import {getStorageInfo, storeFile} from '../utils/fileSystem';
 import VideosList from '../components/VideosList';
 
 const Home = () => {
@@ -31,9 +31,18 @@ const Home = () => {
   const [imageSource, setImageSource] = useState('');
 
   useEffect(() => {
-    getPermissions();
+    init();
   }, []);
 
+  const init = async () => {
+    await getPermissions();
+    const storage = await getStorageInfo();
+    var sizeInMB = (storage.freeSpace / (1024 * 1024)).toFixed(0);
+    if (sizeInMB < 5000) {
+      alert('no more storage');
+    }
+    // console.log('resp', sizeInMB);
+  };
   const getPermissions = async () => {
     await askForCameraPermission();
     await askForMediaPermission();

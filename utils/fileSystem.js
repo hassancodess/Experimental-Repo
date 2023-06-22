@@ -28,3 +28,8 @@ export const getAllVideos = async () => {
   const response = await RNFS.readDir(folderPath);
   return response;
 };
+
+export const getStorageInfo = async () => {
+  const response = await RNFS.getFSInfo();
+  return response;
+};
